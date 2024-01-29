@@ -22,12 +22,12 @@ export const getResponseText = (name) => {
         console.log(file);
       });
     });
-    fs.readdir("./text-response", (err, files) => {
-      console.log("Reading directory (./text-response)");
-      files.forEach((file) => {
-        console.log(file);
-      });
-    });
+    // fs.readdir("./text-response", (err, files) => {
+    //   console.log("Reading directory (./text-response)");
+    //   files.forEach((file) => {
+    //     console.log(file);
+    //   });
+    // });
     // return fs.readFileSync(filePath, {
     //   encoding: "utf-8",
     // });
