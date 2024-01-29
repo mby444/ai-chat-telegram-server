@@ -1,9 +1,22 @@
 import fs from "fs";
 import { BotResponseError } from "./error.js";
+import "../config/dotenv.js";
 
 export const getResponseText = (name) => {
+  const [devPath, prodPath] = [
+    `./text-response/${name}.txt`,
+    `../text-response/${name}.txt`,
+  ];
+  const filePath = process.env.DEV_MODE ? devPath : prodPath;
   try {
-    return fs.readFileSync(`./text-response/${name}.txt`, {
+    // List directory
+    fs.readdir("../", (err, files) => {
+      console.log("Reading directory...");
+      files.forEach((file) => {
+        console.log(file);
+      });
+    });
+    return fs.readFileSync(filePath, {
       encoding: "utf-8",
     });
   } catch (err) {
