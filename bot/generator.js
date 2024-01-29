@@ -22,7 +22,7 @@ export const generateFromFreeText = async (chatId, userData, text) => {
     "*",
     "`",
   ]);
-  await saveUserHistory(userData, text, response, oldUser);
+  await saveUserHistory(userData, text, formattedResponse, oldUser);
   return formattedResponse;
 };
 

@@ -7,7 +7,8 @@ export const getResponseText = (name) => {
       encoding: "utf-8",
     });
   } catch (err) {
-    return "[Gagal menampilkan respons teks]";
+    console.log("getResponseText", err);
+    return `[${err.message}]`;
   }
 };
 
