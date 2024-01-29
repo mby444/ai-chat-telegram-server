@@ -1,37 +1,15 @@
 import fs from "fs";
+import path from "path";
 import { BotResponseError } from "./error.js";
 import "../config/dotenv.js";
 
 export const getResponseText = (name) => {
-  const [devPath, prodPath] = [
-    `./text-response/${name}.txt`,
-    `../text-response/${name}.txt`,
-  ];
-  const filePath = process.env.DEV_MODE ? devPath : prodPath;
+  const filePath = path.join(process.cwd(), `text-response/${name}.txt`);
+  console.log(process.cwd());
   try {
-    // List directory
-    fs.readdir("../", (err, files) => {
-      console.log("Reading directory (../)");
-      files.forEach((file) => {
-        console.log(file);
-      });
+    return fs.readFileSync(filePath, {
+      encoding: "utf-8",
     });
-    fs.readdir("./", (err, files) => {
-      console.log("Reading directory (./)");
-      files.forEach((file) => {
-        console.log(file);
-      });
-    });
-    // fs.readdir("./text-response", (err, files) => {
-    //   console.log("Reading directory (./text-response)");
-    //   files.forEach((file) => {
-    //     console.log(file);
-    //   });
-    // });
-    // return fs.readFileSync(filePath, {
-    //   encoding: "utf-8",
-    // });
-    return "Test";
   } catch (err) {
     console.log("getResponseText", err);
     return `[${err.message}]`;
