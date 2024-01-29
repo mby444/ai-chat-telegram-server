@@ -16,9 +16,10 @@ export const getResponseText = (name) => {
         console.log(file);
       });
     });
-    return fs.readFileSync(filePath, {
-      encoding: "utf-8",
-    });
+    // return fs.readFileSync(filePath, {
+    //   encoding: "utf-8",
+    // });
+    return "Test";
   } catch (err) {
     console.log("getResponseText", err);
     return `[${err.message}]`;
