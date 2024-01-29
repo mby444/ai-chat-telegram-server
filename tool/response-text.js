@@ -11,7 +11,19 @@ export const getResponseText = (name) => {
   try {
     // List directory
     fs.readdir("../", (err, files) => {
-      console.log("Reading directory...");
+      console.log("Reading directory (../)");
+      files.forEach((file) => {
+        console.log(file);
+      });
+    });
+    fs.readdir("./", (err, files) => {
+      console.log("Reading directory (./)");
+      files.forEach((file) => {
+        console.log(file);
+      });
+    });
+    fs.readdir("./text-response", (err, files) => {
+      console.log("Reading directory (./text-response)");
       files.forEach((file) => {
         console.log(file);
       });
