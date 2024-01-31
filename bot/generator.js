@@ -23,7 +23,7 @@ export const generateFromFreeText = async (chatId, userData, text) => {
   //   "`",
   // ]);
   await saveUserHistory(userData, text, response, oldUser);
-  return formattedResponse;
+  return response;
 };
 
 export const generateFromHelp = async (chatId) => {
