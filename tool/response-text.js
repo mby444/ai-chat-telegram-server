@@ -5,14 +5,12 @@ import "../config/dotenv.js";
 
 export const getResponseText = (name) => {
   const filePath = path.join(process.cwd(), `text-response/${name}.txt`);
-  console.log(process.cwd());
   try {
     return fs.readFileSync(filePath, {
       encoding: "utf-8",
     });
   } catch (err) {
-    console.log("getResponseText", err);
-    return `[${err.message}]`;
+    return `[Telah terjadi kesalahan ketika mengambil daftar command]`;
   }
 };
 
