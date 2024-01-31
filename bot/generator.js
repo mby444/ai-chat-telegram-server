@@ -18,20 +18,20 @@ export const generateFromFreeText = async (chatId, userData, text) => {
   const oldUser = await User.findOne({ chatId }, { _id: 0 });
   const oldHistory = getChatHistory(oldUser?.history);
   const response = await generate(text, null, oldHistory);
-  const formattedResponse = escapeMarkdown(fixMarkdownFormat(response), [
-    "*",
-    "`",
-  ]);
-  await saveUserHistory(userData, text, formattedResponse, oldUser);
+  // const formattedResponse = escapeMarkdown(fixMarkdownFormat(response), [
+  //   "*",
+  //   "`",
+  // ]);
+  await saveUserHistory(userData, text, response, oldUser);
   return formattedResponse;
 };
 
 export const generateFromHelp = async (chatId) => {
-  const formattedResponse = escapeMarkdown(fixMarkdownFormat(botCommandList), [
-    "*",
-    "`",
-  ]);
-  return formattedResponse;
+  // const formattedResponse = escapeMarkdown(fixMarkdownFormat(botCommandList), [
+  //   "*",
+  //   "`",
+  // ]);
+  return botCommandList;
 };
 
 export const deleteFromHistory = async (chatId, userData) => {

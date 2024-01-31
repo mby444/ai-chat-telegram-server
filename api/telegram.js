@@ -10,10 +10,10 @@ import {
 export const analizeMarkdown = (markdownString) => {
   const stack = [];
   const errorIndices = [];
-  const mustEnclosedChars = ["*", "_", "`", "\"", "'"];
+  const mustEnclosedChars = ["*", "_", "`", '"', "'"];
   const pushOrReplaceErrors = (charObj) => {
     const itemIndex = errorIndices.findIndex(
-      (obj) => obj.char === charObj.char,
+      (obj) => obj.char === charObj.char
     );
     itemIndex === -1
       ? errorIndices.push(charObj)
@@ -64,7 +64,7 @@ export const escapeMarkdown = (text, excludes = []) => {
 
 export const getPhotoPathById = async (fileId) => {
   const rawData = await fetch(
-    `https://api.telegram.org/bot${botToken}/getFile?file_id=${fileId}`,
+    `https://api.telegram.org/bot${botToken}/getFile?file_id=${fileId}`
   );
   const data = await rawData.json();
   return data.result.file_path;
@@ -72,7 +72,7 @@ export const getPhotoPathById = async (fileId) => {
 
 export const getPhotoBlobByPath = async (filePath) => {
   const rawData = await fetch(
-    `https://api.telegram.org/file/bot${botToken}/${filePath}`,
+    `https://api.telegram.org/file/bot${botToken}/${filePath}`
   );
   const data = await rawData.blob();
   return data;
@@ -117,7 +117,9 @@ export const getPhotoCaption = (text = "") => {
 
 export const savePhoto = async (username, fileId, fileUId, directory) => {
   const fileBuffer = await getBufferPhotoById(fileId);
-  const fileExtension = `.${detectMimeType(fileBuffer.toString("base64")).split("/")[1]}`;
+  const fileExtension = `.${
+    detectMimeType(fileBuffer.toString("base64")).split("/")[1]
+  }`;
   const fileName = `${username}_${fileUId}_${Date.now()}${fileExtension}`;
   const fullPath = path.join(directory, fileName);
   const isDirExists = fs.existsSync(directory);
