@@ -58,6 +58,7 @@ route.post("/random", async (req, res) => {
 
 route.put("/history", async (req, res) => {
   const { chatId, userData } = req.body;
+  console.log("/history", chatId);
   const message =
     "[History chat berhasil dibersihkan, silahkan memulai topik baru]";
   const errorMessage = "[History gagal dibersihkan]";
@@ -66,6 +67,7 @@ route.put("/history", async (req, res) => {
     const responseObj = getSuccessHttpResponseObj("", message);
     res.json(responseObj);
   } catch (err) {
+    console.log("/history", err);
     const errorObj = getFailHttpResponseObj(err, errorMessage);
     res.json(errorObj);
   }
