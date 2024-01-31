@@ -7,8 +7,6 @@ import { corsOptionsDelegate } from "./config/cors.js";
 import { route as chatRoute } from "./route/chat.js";
 import "./config/dotenv.js";
 
-connectDB();
-
 const app = express();
 const port = process.env.PORT;
 
@@ -16,6 +14,8 @@ app.use(bodyParser.json());
 app.use("/chat", cors(), chatRoute);
 app.use("*", cors(), route);
 
-app.listen(port, () => {
-  console.log(`Server running at port ${port}...`);
+connectDB(() => {
+  app.listen(port, () => {
+    console.log(`Server running at port ${port}...`);
+  });
 });
