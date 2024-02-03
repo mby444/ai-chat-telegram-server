@@ -3,11 +3,13 @@ import {
   generateFromFreeText,
   generateFromHelp,
   deleteFromHistory,
+  generateFromPhoto,
 } from "../bot/generator.js";
 import {
   getSuccessHttpResponseObj,
   getFailHttpResponseObj,
 } from "../tool/response-text.js";
+import { fileToGenerativePart } from "../api/telegram.js";
 
 export const route = Router();
 
@@ -25,12 +27,24 @@ route.post("/", async (req, res) => {
   }
 });
 
+route.post("/photo", async (req, res) => {
+  const { chatId, userData, text, file } = req.body;
+  console.log("/photo", chatId);
+  try {
+    const responseText = await generateFromPhoto(chatId, userData, text, file);
+    const responseObj = getSuccessHttpResponseObj(responseText);
+    res.json(responseObj);
+  } catch (err) {
+    console.log("/photo", err);
+    const errorObj = getFailHttpResponseObj(err);
+    res.json(errorObj);
+  }
+});
+
 route.post("/help", async (req, res) => {
-  const { chatId } = req.body;
-  console.log("/help", chatId);
   const errorMessage = "[Gagal menampilkan daftar command]";
   try {
-    const responseText = await generateFromHelp(chatId);
+    const responseText = await generateFromHelp();
     const responseObj = getSuccessHttpResponseObj(responseText);
     res.json(responseObj);
   } catch (err) {
