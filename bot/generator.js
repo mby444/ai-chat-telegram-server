@@ -1,3 +1,4 @@
+import path from "path";
 import "../config/dotenv.js";
 import { generate, checkMimeType, getChatHistory } from "../api/gemini.js";
 import { botToken, botCommandList, botChatOpts } from "../constant/index.js";
@@ -29,7 +30,8 @@ export const generateFromPhoto = async (chatId, userData, text, file) => {
   const oldUser = await User.findOne({ chatId }, { _id: 0 });
   const photo = await fileToGenerativePart(fileId);
   checkMimeType(photo.inlineData.data);
-  await savePhoto(userData.username, fileId, fileUId, "./upload/photo");
+  const photoStoragePath = path.join(process.cwd, "upload/photo");
+  await savePhoto(userData.username, fileId, fileUId, photoStoragePath);
   const response = await generate(caption, [photo]);
   await saveUserHistory(userData, caption, response, oldUser);
   return response;
