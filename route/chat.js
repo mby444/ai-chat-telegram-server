@@ -9,7 +9,6 @@ import {
   getSuccessHttpResponseObj,
   getFailHttpResponseObj,
 } from "../tool/response-text.js";
-import { fileToGenerativePart } from "../api/telegram.js";
 
 export const route = Router();
 
