@@ -1,15 +1,12 @@
 import path from "path";
 import "../config/dotenv.js";
 import { generate, checkMimeType, getChatHistory } from "../api/gemini.js";
-import { botToken, botCommandList, botChatOpts } from "../constant/index.js";
+import { botCommandList } from "../constant/index.js";
 import {
   fileToGenerativePart,
   savePhoto,
   getPhotoCaption,
-  escapeMarkdown,
-  fixMarkdownFormat,
 } from "../api/telegram.js";
-import { BotResponseError } from "../tool/error.js";
 import { saveUserHistory } from "../database/tool/users.js";
 import { moveHistory } from "../database/tool/cleared-histories.js";
 import User from "../database/model/Users.js";
