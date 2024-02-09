@@ -6,6 +6,7 @@ import {
   mimeSignatures,
   reservedMdRegExp,
 } from "../constant/index.js";
+import { uploadFileToS3 } from "./aws.js";
 
 export const analizeMarkdown = (markdownString) => {
   const stack = [];
@@ -122,7 +123,8 @@ export const savePhoto = async (username, fileId, fileUId, directory) => {
   }`;
   const fileName = `${username}_${fileUId}_${Date.now()}${fileExtension}`;
   const fullPath = path.join(directory, fileName);
-  const isDirExists = fs.existsSync(directory);
-  if (!isDirExists) fs.mkdirSync(directory, { recursive: true });
-  fs.writeFileSync(fullPath, fileBuffer);
+  await uploadFileToS3(fileBuffer, fullPath);
+  // const isDirExists = fs.existsSync(directory);
+  // if (!isDirExists) fs.mkdirSync(directory, { recursive: true });
+  // fs.writeFileSync(fullPath, fileBuffer);
 };
