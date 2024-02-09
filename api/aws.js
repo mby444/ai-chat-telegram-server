@@ -2,7 +2,7 @@ import AWS from "aws-sdk";
 import { BotResponseError } from "../tool/error.js";
 import "../config/dotenv.js";
 
-const s3 = AWS.S3();
+const s3 = new AWS.S3();
 const bucket = process.env.AWS_BUCKET;
 
 export const uploadFileToS3 = async (fileBuffer, fileFullPath) => {
