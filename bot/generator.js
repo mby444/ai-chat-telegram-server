@@ -25,11 +25,12 @@ export const generateFromPhoto = async (chatId, userData, text, file) => {
   const fileUId = file.file_unique_id;
   const caption = getPhotoCaption(text);
   const oldUser = await User.findOne({ chatId }, { _id: 0 });
+  const oldHistory = getChatHistory(oldUser?.history);
   const photo = await fileToGenerativePart(fileId);
   checkMimeType(photo.inlineData.data);
   const photoStoragePath = path.join(process.cwd(), "upload/photo");
   // await savePhoto(userData.username, fileId, fileUId, photoStoragePath);
-  const response = await generate(caption, [photo]);
+  const response = await generate(caption, [photo], oldHistory);
   await saveUserHistory(userData, caption, response, oldUser);
   return response;
 };
