@@ -9,6 +9,7 @@ import {
   getSuccessHttpResponseObj,
   getFailHttpResponseObj,
 } from "../tool/response-text.js";
+import { fileToGenerativePart } from "../api/telegram.js";
 
 export const route = Router();
 
@@ -29,7 +30,9 @@ route.post("/", async (req, res) => {
 route.post("/photo", async (req, res) => {
   const { chatId, userData, text, file } = req.body;
   console.log("/photo", chatId);
-  console.log(file);
+  console.log("/photo", userData);
+  console.log("/photo", text);
+  console.log("/photo", file);
   try {
     const responseText = await generateFromPhoto(chatId, userData, text, file);
     const responseObj = getSuccessHttpResponseObj(responseText);
