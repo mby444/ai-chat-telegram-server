@@ -1,5 +1,4 @@
 import AWS from "aws-sdk";
-import { BotResponseError } from "../tool/error.js";
 import "../config/dotenv.js";
 
 const s3 = new AWS.S3();
@@ -12,8 +11,9 @@ export const uploadFileToS3 = async (fileBuffer, fileFullPath) => {
       Key: fileFullPath,
       Body: fileBuffer,
     };
-    await s3.putObject(params).promise();
+    const result = await s3.putObject(params).promise();
+    console.log("uploadFileToS3", result);
   } catch (err) {
-    console.log("uploadFile", err);
+    console.log("uploadFileToS3", err);
   }
 };
