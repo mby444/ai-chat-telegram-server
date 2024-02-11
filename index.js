@@ -11,8 +11,8 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
-app.use("/chat", cors(), chatRoute);
-app.use("*", cors(), route);
+app.use("/chat", cors(corsOptionsDelegate), chatRoute);
+app.use("*", cors(corsOptionsDelegate), route);
 
 connectDB(() => {
   app.listen(port, () => {
