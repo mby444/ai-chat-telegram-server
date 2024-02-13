@@ -82,10 +82,7 @@ route.put("/history", async (req, res) => {
     res.json(responseObj);
   } catch (err) {
     console.log("/history", err);
-    const message = BotResponseError.getMessage(err, {
-      defaultMessage: errorMessage,
-    });
-    const errorObj = getFailHttpResponseObj(err, message);
+    const errorObj = getFailHttpResponseObj(err, errorMessage);
     res.json(errorObj);
   }
 });
