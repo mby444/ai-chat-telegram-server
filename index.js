@@ -10,9 +10,10 @@ import "./config/dotenv.js";
 const app = express();
 const port = process.env.PORT;
 
+app.options("*", cors(corsOptionsDelegate));
 app.use(bodyParser.json());
-app.use("/chat", cors(corsOptionsDelegate), chatRoute);
-app.use("*", cors(corsOptionsDelegate), route);
+app.use("/chat", chatRoute);
+app.use("*", route);
 
 connectDB(() => {
   app.listen(port, () => {

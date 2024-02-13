@@ -5,6 +5,7 @@ import {
   deleteFromHistory,
   generateFromPhoto,
 } from "../bot/generator.js";
+import { BotResponseError } from "../tool/error.js";
 import {
   getSuccessHttpResponseObj,
   getFailHttpResponseObj,
@@ -81,7 +82,10 @@ route.put("/history", async (req, res) => {
     res.json(responseObj);
   } catch (err) {
     console.log("/history", err);
-    const errorObj = getFailHttpResponseObj(err, errorMessage);
+    const message = BotResponseError.getMessage(err, {
+      defaultMessage: errorMessage,
+    });
+    const errorObj = getFailHttpResponseObj(err, message);
     res.json(errorObj);
   }
 });

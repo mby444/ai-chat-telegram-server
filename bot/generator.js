@@ -2,6 +2,7 @@ import path from "path";
 import "../config/dotenv.js";
 import { generate, checkMimeType, getChatHistory } from "../api/gemini.js";
 import { botCommandList } from "../constant/index.js";
+import { BotResponseError } from "../tool/error.js";
 import {
   fileToGenerativePart,
   savePhoto,
