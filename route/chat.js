@@ -80,7 +80,6 @@ route.put("/history", async (req, res) => {
     const responseObj = getSuccessHttpResponseObj(message, message);
     res.json(responseObj);
   } catch (err) {
-    console.log(1, err.message);
     console.log("/history", err);
     const errorObj = getFailHttpResponseObj(err, errorMessage);
     res.json(errorObj);

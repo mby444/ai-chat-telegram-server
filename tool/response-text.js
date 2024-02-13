@@ -27,7 +27,6 @@ export const getSuccessHttpResponseObj = (text, message = "") => {
 };
 export const getFailHttpResponseObj = (err, defaultMessage = null) => {
   const errorMessage = BotResponseError.getMessage(err, { defaultMessage });
-  console.log(2, errorMessage);
   return {
     status: "fail",
     statusCode: 500,

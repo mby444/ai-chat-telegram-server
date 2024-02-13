@@ -19,7 +19,7 @@ const updateClearedHistory = async (data, history, oldClearedHistory) => {
       $set: {
         histories: mergedHistory,
       },
-    },
+    }
   );
 };
 
@@ -39,9 +39,9 @@ export const moveHistory = async (
     date,
   },
   history,
-  oldClearedHistory,
+  oldClearedHistory
 ) => {
-  if (!history) throw new BotResponseError("[History chat masih kosong]");
+  if (!history) throw new BotResponseError("\\[History chat masih kosong\\]");
   const data = {
     chatId,
     firstName,
