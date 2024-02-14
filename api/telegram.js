@@ -1,4 +1,3 @@
-import fs from "fs";
 import path from "path";
 import "../config/dotenv.js";
 import {
@@ -124,7 +123,4 @@ export const savePhoto = async (username, fileId, fileUId, directory) => {
   const fileName = `${username}_${fileUId}_${Date.now()}${fileExtension}`;
   const fullPath = path.join(directory, fileName);
   await uploadFileToS3(fileBuffer, fullPath);
-  // const isDirExists = fs.existsSync(directory);
-  // if (!isDirExists) fs.mkdirSync(directory, { recursive: true });
-  // fs.writeFileSync(fullPath, fileBuffer);
 };

@@ -8,11 +8,12 @@ const userSchema = new Schema({
   type: String,
   isBot: Boolean,
   languageCode: String,
-  date: Number,
   history: [
     {
       role: String,
       parts: String,
+      messageId: Number,
+      date: Number,
     },
   ],
 });

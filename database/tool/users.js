@@ -14,12 +14,13 @@ const updateUserHistory = async (data, oldUser) => {
       $set: {
         history: mergedHistory,
       },
-    },
+    }
   );
 };
 
 export const saveUserHistory = async (
   {
+    messageId,
     id: chatId,
     first_name: firstName,
     last_name: lastName,
@@ -31,16 +32,20 @@ export const saveUserHistory = async (
   },
   prompt,
   response,
-  oldUser,
+  oldUser
 ) => {
   const newHistory = [
     {
       role: "user",
       parts: prompt,
+      messageId,
+      date,
     },
     {
       role: "model",
       parts: response,
+      messageId,
+      date,
     },
   ];
   const data = {
@@ -51,7 +56,6 @@ export const saveUserHistory = async (
     type,
     isBot,
     languageCode,
-    date,
     history: newHistory,
   };
   oldUser

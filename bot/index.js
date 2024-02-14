@@ -34,8 +34,9 @@ export class Bot {
         try {
           const formattedResponse = escapeMarkdown(
             fixMarkdownFormat(botCommandList),
-            ["*", "`"],
+            ["*", "`"]
           );
+          await this.bot.deleteMessage(chatId, messageId);
           await this.bot.sendMessage(chatId, formattedResponse, botChatOpts);
         } catch (err) {
           console.log("start", err);
@@ -58,14 +59,14 @@ export class Bot {
           const response = await generate(text, null, oldHistory);
           const formattedResponse = escapeMarkdown(
             fixMarkdownFormat(response),
-            ["*", "`"],
+            ["*", "`"]
           );
           await this.bot.sendMessage(chatId, formattedResponse, botChatOpts);
           await saveUserHistory(userData, text, response, oldUser);
         } catch (err) {
           await this.bot.sendMessage(
             chatId,
-            "[Gagal menampilkan topik random]",
+            "[Gagal menampilkan topik random]"
           );
         } finally {
           disrequest();
@@ -85,7 +86,7 @@ export class Bot {
           await moveHistory(userData, oldHistory, oldClearedHistory);
           await this.bot.sendMessage(
             chatId,
-            "[History chat berhasil dibersihkan, silahkan memulai topik baru]",
+            "[History chat berhasil dibersihkan, silahkan memulai topik baru]"
           );
         } catch (err) {
           await BotResponseError.sendMessage(this.bot, chatId, err, {
@@ -119,7 +120,7 @@ export class Bot {
           const response = await generate(caption, [photo]);
           const formattedResponse = escapeMarkdown(
             fixMarkdownFormat(response),
-            ["*", "`"],
+            ["*", "`"]
           );
           await this.bot.sendMessage(chatId, formattedResponse, botChatOpts);
           await saveUserHistory(userData, caption, response, oldUser);
@@ -143,7 +144,7 @@ export class Bot {
           const response = await generate(text, null, oldHistory);
           const formattedResponse = escapeMarkdown(
             fixMarkdownFormat(response),
-            ["*", "`"],
+            ["*", "`"]
           );
           console.log(formattedResponse);
           await this.bot.sendMessage(chatId, formattedResponse, botChatOpts);
