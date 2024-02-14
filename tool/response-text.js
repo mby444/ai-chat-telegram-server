@@ -14,7 +14,11 @@ export const getResponseText = (name) => {
   }
 };
 
-export const getSuccessHttpResponseObj = (text, message = "") => {
+export const getSuccessHttpResponseObj = (
+  text,
+  message = "",
+  otherData = {}
+) => {
   return {
     status: "success",
     statusCode: 200,
@@ -22,10 +26,16 @@ export const getSuccessHttpResponseObj = (text, message = "") => {
     errorMessage: "",
     data: {
       text,
+      ...otherData,
     },
   };
 };
-export const getFailHttpResponseObj = (err, defaultMessage = null) => {
+
+export const getFailHttpResponseObj = (
+  err,
+  defaultMessage = null,
+  otherData = {}
+) => {
   const errorMessage = BotResponseError.getMessage(err, { defaultMessage });
   return {
     status: "fail",
@@ -34,6 +44,7 @@ export const getFailHttpResponseObj = (err, defaultMessage = null) => {
     errorMessage,
     data: {
       text: "",
+      ...otherData,
     },
   };
 };

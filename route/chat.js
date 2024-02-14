@@ -76,8 +76,10 @@ route.put("/history", async (req, res) => {
     "[History chat berhasil dibersihkan, silahkan memulai topik baru]";
   const errorMessage = "[History gagal dibersihkan]";
   try {
-    await deleteFromHistory(chatId, userData);
-    const responseObj = getSuccessHttpResponseObj(message, message);
+    const deletedMessageIds = await deleteFromHistory(chatId, userData);
+    const responseObj = getSuccessHttpResponseObj(message, message, {
+      deletedMessageIds,
+    });
     res.json(responseObj);
   } catch (err) {
     console.log("/history", err);

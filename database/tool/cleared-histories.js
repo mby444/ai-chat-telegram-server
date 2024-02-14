@@ -1,6 +1,5 @@
 import ClearedHistory from "../model/ClearedHistories.js";
 import User from "../model/Users.js";
-import { BotResponseError } from "../../tool/error.js";
 
 const createClearedHistory = async (data, history) => {
   await ClearedHistory.create({
@@ -41,7 +40,6 @@ export const moveHistory = async (
   history,
   oldClearedHistory
 ) => {
-  if (!history) throw new BotResponseError("\\[History chat masih kosong\\]");
   const data = {
     chatId,
     firstName,
