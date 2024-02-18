@@ -10,9 +10,7 @@ const userSchema = new Schema({
   languageCode: String,
   botChatId: Number,
   botFirstName: String,
-  botLastName: String,
   botUsername: String,
-  botType: String,
   botIsBot: Boolean,
   history: [
     {
