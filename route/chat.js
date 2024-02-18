@@ -17,7 +17,7 @@ route.post("/", async (req, res) => {
   const { chatId, text } = req.body;
   console.log("/", chatId);
   try {
-    const responseText = await generateFromFreeText(chatId, userData, text);
+    const responseText = await generateFromFreeText(chatId, text);
     const responseObj = getSuccessHttpResponseObj(responseText);
     res.json(responseObj);
   } catch (err) {
@@ -71,8 +71,8 @@ route.post("/random", async (req, res) => {
 });
 
 route.post("/history", async (req, res) => {
-  const { botData, userData, text } = req.body;
-  console.log("/", chatId);
+  const { chatId, botData, userData, text } = req.body;
+  console.log("/history", chatId);
   try {
     const responseText = await saveUserHistory(
       botData,
