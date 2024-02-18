@@ -13,15 +13,15 @@ import { moveHistory } from "../database/tool/cleared-histories.js";
 import User from "../database/model/Users.js";
 import ClearedHistory from "../database/model/ClearedHistories.js";
 
-export const generateFromFreeText = async (chatId, userData, text) => {
+export const generateFromFreeText = async (chatId, text) => {
   const oldUser = await User.findOne({ chatId }, { _id: 0 });
   const oldHistory = getChatHistory(oldUser?.history);
   const response = await generate(text, null, oldHistory);
-  await saveUserHistory(userData, text, response, oldUser);
+  // await saveUserHistory(userData, text, response, oldUser);
   return response;
 };
 
-export const generateFromPhoto = async (chatId, userData, text, file) => {
+export const generateFromPhoto = async (chatId, username, text, file) => {
   const fileId = file.file_id;
   const fileUId = file.file_unique_id;
   const caption = getPhotoCaption(text);
@@ -30,9 +30,9 @@ export const generateFromPhoto = async (chatId, userData, text, file) => {
   const photo = await fileToGenerativePart(fileId);
   checkMimeType(photo.inlineData.data);
   const photoStoragePath = path.join(process.cwd(), "upload/photo");
-  await savePhoto(userData.username, fileId, fileUId, photoStoragePath);
+  await savePhoto(username, fileId, fileUId, photoStoragePath);
   const response = await generate(caption, [photo], oldHistory);
-  await saveUserHistory(userData, caption, response, oldUser);
+  // await saveUserHistory(userData, caption, response, oldUser);
   return response;
 };
 

@@ -20,6 +20,16 @@ const updateUserHistory = async (data, oldUser) => {
 
 export const saveUserHistory = async (
   {
+    botMessageId,
+    botChatId,
+    botFirstName,
+    botLastName,
+    botUsername,
+    botType,
+    botIsBot,
+    botDate,
+  },
+  {
     messageId,
     id: chatId,
     first_name: firstName,
@@ -44,8 +54,8 @@ export const saveUserHistory = async (
     {
       role: "model",
       parts: response,
-      messageId,
-      date,
+      messageId: botMessageId,
+      date: botDate,
     },
   ];
   const data = {
@@ -56,6 +66,12 @@ export const saveUserHistory = async (
     type,
     isBot,
     languageCode,
+    botChatId,
+    botFirstName,
+    botLastName,
+    botUsername,
+    botType,
+    botIsBot,
     history: newHistory,
   };
   oldUser
