@@ -110,6 +110,8 @@ route.put("/history", async (req, res) => {
     const deletedMessageIds = await deleteFromHistory(chatId, userData);
     const responseObj = getSuccessHttpResponseObj(message, message, {
       deletedMessageIds,
+      successMessage: message,
+      errorMessage,
     });
     res.json(responseObj);
   } catch (err) {
