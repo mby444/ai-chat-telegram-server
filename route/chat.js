@@ -19,7 +19,9 @@ route.post("/", async (req, res) => {
   console.log("/", chatId);
   try {
     const responseText = await generateFromFreeText(chatId, text);
-    const responseObj = getSuccessHttpResponseObj(responseText);
+    const responseObj = getSuccessHttpResponseObj(responseText, {
+      prompt: text,
+    });
     res.json(responseObj);
   } catch (err) {
     console.log("/", err);
