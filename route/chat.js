@@ -9,6 +9,7 @@ import {
   getSuccessHttpResponseObj,
   getFailHttpResponseObj,
 } from "../tool/response-text.js";
+import { getPhotoCaption } from "../api/telegram.js";
 import { saveUserHistory } from "../database/tool/users.js";
 
 export const route = Router();
@@ -31,8 +32,16 @@ route.post("/photo", async (req, res) => {
   const { chatId, username, text, file } = req.body;
   console.log("/photo", chatId);
   try {
-    const responseText = await generateFromPhoto(chatId, username, text, file);
-    const responseObj = getSuccessHttpResponseObj(responseText);
+    const caption = getPhotoCaption(text);
+    const responseText = await generateFromPhoto(
+      chatId,
+      username,
+      caption,
+      file
+    );
+    const responseObj = getSuccessHttpResponseObj(responseText, null, {
+      prompt: caption,
+    });
     res.json(responseObj);
   } catch (err) {
     console.log("/photo", err);
@@ -61,7 +70,9 @@ route.post("/random", async (req, res) => {
   const errorMessage = "[Gagal menampilkan topik random]";
   try {
     const responseText = await generateFromFreeText(chatId, text);
-    const responseObj = getSuccessHttpResponseObj(responseText);
+    const responseObj = getSuccessHttpResponseObj(responseText, null, {
+      prompt: text,
+    });
     res.json(responseObj);
   } catch (err) {
     console.log("/random", err);
@@ -72,7 +83,7 @@ route.post("/random", async (req, res) => {
 
 route.post("/history", async (req, res) => {
   const { chatId, botData, userData, text } = req.body;
-  console.log("/history", chatId);
+  console.log("/history", chatId, botData);
   try {
     const responseText = await saveUserHistory(
       botData,
