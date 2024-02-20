@@ -37,7 +37,8 @@ export const generateFromHelp = async () => {
 export const deleteFromHistory = async (chatId, userData) => {
   const oldUser = await User.findOne({ chatId }, { _id: 0 });
   const oldHistory = oldUser?.history;
-  if (!oldHistory) throw new BotResponseError("[History chat masih kosong]");
+  if (!oldHistory)
+    throw new BotResponseError("\\[History chat masih kosong\\]");
   const oldMessageIds = oldHistory.map((h) => h.messageId);
   const oldClearedHistory = await ClearedHistory.findOne({ chatId });
   await moveHistory(userData, oldHistory, oldClearedHistory);

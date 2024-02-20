@@ -70,7 +70,7 @@ route.post("/random", async (req, res) => {
   const { chatId } = req.body;
   const text = "Jelaskan tentang topik apapun secara random";
   console.log("/random", chatId);
-  const errorMessage = "[Gagal menampilkan topik random]";
+  const errorMessage = "\\[Gagal menampilkan topik random\\]";
   try {
     const responseText = await generateFromFreeText(chatId, text);
     const responseObj = getSuccessHttpResponseObj(responseText, null, {
@@ -110,7 +110,7 @@ route.put("/history", async (req, res) => {
   console.log("/history", chatId);
   const message =
     "[History chat berhasil dibersihkan, silahkan memulai topik baru]";
-  const errorMessage = "[History gagal dibersihkan]";
+  const errorMessage = "\\[History gagal dibersihkan\\]";
   try {
     const deletedMessageIds = await deleteFromHistory(chatId, userData);
     const responseObj = getSuccessHttpResponseObj(message, message, {
