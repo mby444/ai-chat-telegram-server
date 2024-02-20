@@ -20,7 +20,7 @@ route.post("/", async (req, res) => {
   console.log("/", chatId, text);
   try {
     const responseText = await generateFromFreeText(chatId, text);
-    const responseObj = getSuccessHttpResponseObj(responseText, {
+    const responseObj = getSuccessHttpResponseObj(responseText, null, {
       prompt: text,
     });
     res.json(responseObj);
