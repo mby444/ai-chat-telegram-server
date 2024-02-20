@@ -11,12 +11,13 @@ import {
 } from "../tool/response-text.js";
 import { getPhotoCaption } from "../api/telegram.js";
 import { saveUserHistory } from "../database/tool/users.js";
+import User from "../database/model/Users.js";
 
 export const route = Router();
 
 route.post("/", async (req, res) => {
   const { chatId, text } = req.body;
-  console.log("/", chatId);
+  console.log("/", chatId, text);
   try {
     const responseText = await generateFromFreeText(chatId, text);
     const responseObj = getSuccessHttpResponseObj(responseText, {
@@ -32,7 +33,7 @@ route.post("/", async (req, res) => {
 
 route.post("/photo", async (req, res) => {
   const { chatId, username, text, file } = req.body;
-  console.log("/photo", chatId);
+  console.log("/photo", chatId, text);
   try {
     const caption = getPhotoCaption(text);
     const responseText = await generateFromPhoto(
@@ -85,13 +86,15 @@ route.post("/random", async (req, res) => {
 
 route.post("/history", async (req, res) => {
   const { chatId, botData, userData, text } = req.body;
-  console.log("/history", chatId, botData);
+  console.log("/history", chatId, botData, userData, text);
   try {
+    const oldUser = await User.findOne({ chatId }, { _id: 0 });
     const responseText = await saveUserHistory(
       botData,
       userData,
       text,
-      botData.botText
+      botData.botText,
+      oldUser
     );
     const responseObj = getSuccessHttpResponseObj(responseText);
     res.json(responseObj);

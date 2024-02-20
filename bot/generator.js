@@ -3,12 +3,7 @@ import "../config/dotenv.js";
 import { generate, checkMimeType, getChatHistory } from "../api/gemini.js";
 import { botCommandList } from "../constant/index.js";
 import { BotResponseError } from "../tool/error.js";
-import {
-  fileToGenerativePart,
-  savePhoto,
-  getPhotoCaption,
-} from "../api/telegram.js";
-import { saveUserHistory } from "../database/tool/users.js";
+import { fileToGenerativePart, savePhoto } from "../api/telegram.js";
 import { moveHistory } from "../database/tool/cleared-histories.js";
 import User from "../database/model/Users.js";
 import ClearedHistory from "../database/model/ClearedHistories.js";

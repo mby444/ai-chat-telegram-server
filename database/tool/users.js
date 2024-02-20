@@ -35,6 +35,7 @@ export const saveUserHistory = async (
   response,
   oldUser
 ) => {
+  console.log("saveUserHistory()", prompt);
   const newHistory = [
     {
       role: "user",
