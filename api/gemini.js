@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { geminiKey, allowedImageMime } from "../constant/index.js";
 import { detectMimeType, getPhotoCaption } from "./telegram.js";
 import { BotResponseError } from "../tool/error.js";
+import { botSafetySettings as safetySettings } from "../constant/index.js";
 
 const genAI = new GoogleGenerativeAI(geminiKey);
 
@@ -29,11 +30,17 @@ export const getPromptResult = async (prompt, images, history) => {
   console.log("history", history);
   if (images) {
     const imagePrompt = getPhotoCaption(prompt);
-    const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+    const model = genAI.getGenerativeModel({
+      model: "gemini-pro-vision",
+      safetySettings,
+    });
     const result = await model.generateContent([imagePrompt, ...images]);
     return result;
   }
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({
+    model: "gemini-pro",
+    safetySettings,
+  });
   const chat = model.startChat({ history });
   const result = await chat.sendMessage(prompt);
   return result;

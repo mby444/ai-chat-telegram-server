@@ -1,3 +1,4 @@
+import { HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 import { getResponseText } from "../tool/response-text.js";
 
 export const botToken = process.env.BOT_TOKEN;
@@ -19,3 +20,25 @@ export const allowedImageMime = [
 ];
 export const botChatOpts = { parse_mode: "MarkdownV2" };
 export const reservedMdRegExp = /([^a-zA-Z0-9 ])/;
+export const botSafetySettings = [
+  {
+    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+    threshold: HarmBlockThreshold.BLOCK_NONE,
+  },
+  {
+    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+    threshold: HarmBlockThreshold.BLOCK_NONE,
+  },
+  {
+    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+    threshold: HarmBlockThreshold.BLOCK_NONE,
+  },
+  {
+    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+    threshold: HarmBlockThreshold.BLOCK_NONE,
+  },
+  {
+    category: HarmCategory.HARM_CATEGORY_UNSPECIFIED,
+    threshold: HarmBlockThreshold.BLOCK_NONE,
+  },
+];
