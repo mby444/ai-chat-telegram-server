@@ -1,8 +1,8 @@
+import { botDefaultErrorMessage } from "../constant/index.js";
+
 export class BotResponseError extends Error {
   static getMessage(err, options = {}) {
-    const defaultMessage =
-      options?.defaultMessage ||
-      "[Telah terjadi kesalahan ketika memproses pesan anda, beberapa kemungkinan penyebabnya yaitu topik sensitif, kalimat yang mengandung SARA, kata-kata tidak pantas, kata-kata ambigu, teks tidak jelas, teks dengan font yang tidak standar, dan pelanggaran atas kebijakan kami]";
+    const defaultMessage = options?.defaultMessage || botDefaultErrorMessage;
     const errorMessage =
       err instanceof BotResponseError ? err.message : defaultMessage;
     return errorMessage;
