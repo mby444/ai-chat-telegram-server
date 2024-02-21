@@ -4,7 +4,6 @@ import { getResponseText } from "../tool/response-text.js";
 export const botToken = process.env.BOT_TOKEN;
 export const geminiKey = process.env.GEMINI_API_KEY;
 export const botCommandList = getResponseText("command");
-export const botDefaultErrorMessage = getResponseText("default-error");
 export const mimeSignatures = {
   JVBERi0: "application/pdf",
   R0lGODdh: "image/gif",

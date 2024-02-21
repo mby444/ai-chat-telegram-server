@@ -1,8 +1,8 @@
-import { botDefaultErrorMessage } from "../constant/index.js";
-
 export class BotResponseError extends Error {
   static getMessage(err, options = {}) {
-    const defaultMessage = options?.defaultMessage || botDefaultErrorMessage;
+    const defaultMessage =
+      options?.defaultMessage ||
+      "[Telah terjadi kesalahan ketika memproses pesan anda]";
     const errorMessage =
       err instanceof BotResponseError ? err.message : defaultMessage;
     return errorMessage;
