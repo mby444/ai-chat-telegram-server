@@ -12,7 +12,6 @@ export const generateFromFreeText = async (chatId, text) => {
   const oldUser = await User.findOne({ chatId }, { _id: 0 });
   const oldHistory = getChatHistory(oldUser?.history);
   const response = await generate(text, null, oldHistory);
-  // await saveUserHistory(userData, text, response, oldUser);
   return response;
 };
 
@@ -26,7 +25,6 @@ export const generateFromPhoto = async (chatId, username, text, file) => {
   const photoStoragePath = path.join(process.cwd(), "upload/photo");
   await savePhoto(username, fileId, fileUId, photoStoragePath);
   const response = await generate(text, [photo], oldHistory);
-  // await saveUserHistory(userData, caption, response, oldUser);
   return response;
 };
 
@@ -37,8 +35,7 @@ export const generateFromHelp = async () => {
 export const deleteFromHistory = async (chatId, userData) => {
   const oldUser = await User.findOne({ chatId }, { _id: 0 });
   const oldHistory = oldUser?.history;
-  if (!oldHistory)
-    throw new BotResponseError("\\[History chat masih kosong\\]");
+  if (!oldHistory) throw new BotResponseError("[History chat masih kosong]");
   const oldMessageIds = oldHistory.map((h) => h.messageId);
   const oldClearedHistory = await ClearedHistory.findOne({ chatId });
   await moveHistory(userData, oldHistory, oldClearedHistory);
