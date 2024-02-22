@@ -32,7 +32,6 @@ export const getPromptResult = async (prompt, images, history) => {
     const imagePrompt = getPhotoCaption(prompt);
     const model = genAI.getGenerativeModel({
       model: "gemini-pro-vision",
-      safetySettings,
     });
     const result = await model.generateContent([imagePrompt, ...images]);
     return result;
