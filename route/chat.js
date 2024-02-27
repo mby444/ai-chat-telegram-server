@@ -59,6 +59,7 @@ route.post("/ytmp4/:num", async (req, res) => {
   const videoNumber = req.params.num;
   const videoPath = path.join(process.cwd(), `yt/${videoNumber}.mp4`);
   const videoBuffer = fs.readFileSync(videoPath);
+  console.log("videoBuffer", videoBuffer.toString("base64"));
   res.send(videoBuffer);
 });
 
