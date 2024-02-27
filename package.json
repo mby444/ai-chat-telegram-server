@@ -12,8 +12,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.511.0",
-    "@ffmpeg-installer/ffmpeg": "^1.1.0",
-    "@ffprobe-installer/ffprobe": "^2.1.2",
     "@google/generative-ai": "^0.1.3",
     "aws-sdk": "^2.1554.0",
     "aws-sdk-js-codemod": "^1.0.0",
@@ -21,8 +19,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "ffmpeg": "^0.0.4",
-    "fluent-ffmpeg": "^2.1.2",
     "mongoose": "^8.1.1",
     "node-telegram-bot-api": "^0.64.0"
   }
