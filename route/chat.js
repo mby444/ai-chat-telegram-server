@@ -55,12 +55,21 @@ route.post("/photo", async (req, res) => {
   }
 });
 
+route.get("/ytmp4/:num", async (req, res) => {
+  const videoNumber = req.params.num;
+  const videoPath = path.join(process.cwd(), `yt/${videoNumber}.mp4`);
+  const videoBuffer = fs.readFileSync(videoPath);
+  const videoBlob = new Blob([videoBuffer]);
+  console.log("videoBlob", videoBlob);
+  res.send(videoBlob);
+});
+
 route.post("/ytmp4/:num", async (req, res) => {
   const videoNumber = req.params.num;
   const videoPath = path.join(process.cwd(), `yt/${videoNumber}.mp4`);
   const videoBuffer = fs.readFileSync(videoPath);
-  console.log("videoBuffer", videoBuffer.toString("base64"));
-  res.send(videoBuffer);
+  const base64video = videoBuffer.toString("base64");
+  res.json({ data: base64video });
 });
 
 route.post("/help", async (req, res) => {
