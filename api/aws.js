@@ -20,6 +20,25 @@ export const getFilesFromS3 = async () => {
   }
 };
 
+export const getFileFromS3 = async (key) => {
+  try {
+    const params = {
+      Bucket: bucket,
+      Key: key,
+    };
+    const file = await s3.getObject(params);
+    return file;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getBufferFromS3 = async (key) => {
+  const obj = await getFileFromS3(key);
+  const buffer = obj.Body;
+  return buffer;
+};
+
 export const uploadFileToS3 = async (fileBuffer, fileFullPath) => {
   try {
     const params = {

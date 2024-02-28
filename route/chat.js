@@ -55,26 +55,24 @@ route.post("/photo", async (req, res) => {
   }
 });
 
-route.get("/ytmp4/:num", async (req, res) => {
-  const videoNumber = req.params.num;
-  const videoPath = path.join(process.cwd(), `yt/${videoNumber}.mp4`);
-  const videoBuffer = fs.readFileSync(videoPath);
-  const videoBlob = new Blob([videoBuffer]);
-  console.log("videoBlob", videoBlob);
-  res.send(videoBlob);
-});
+// route.get("/ytmp4/:num", async (req, res) => {
+//   const videoNumber = req.params.num;
+//   const videoPath = path.join(process.cwd(), `yt/${videoNumber}.mp4`);
+//   const videoBuffer = fs.readFileSync(videoPath);
+//   const videoBlob = new Blob([videoBuffer]);
+//   console.log("videoBlob", videoBlob);
+//   res.send(videoBlob);
+// });
 
 route.post("/ytmp4/:num", async (req, res) => {
   const videoNumber = req.params.num;
   const videoPath = path.join(process.cwd(), `yt/${videoNumber}.mp4`);
   const videoBuffer = fs.readFileSync(videoPath);
-  const base64video = videoBuffer.toString("base64");
-  console.log(
-    "base64video",
-    base64video.length,
-    base64video.substring(0, 1000)
-  );
-  res.json({ data: base64video });
+  const videoBlob = new Blob([videoBuffer]);
+  res.json({
+    key: "",
+    bucket: "",
+  });
 });
 
 route.post("/help", async (req, res) => {
@@ -132,8 +130,7 @@ route.post("/history", async (req, res) => {
 route.put("/history", async (req, res) => {
   const { chatId, userData } = req.body;
   console.log("/history", chatId);
-  const message =
-    "[History chat berhasil dibersihkan, silahkan memulai topik baru]";
+  const message = "\\[History chat berhasil dibersihkan\\]";
   const errorMessage = "\\[History gagal dibersihkan\\]";
   try {
     const deletedMessageIds = await deleteFromHistory(chatId, userData);
