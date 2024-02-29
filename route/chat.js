@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import { Router } from "express";
 import {
   generateFromFreeText,
@@ -53,26 +51,6 @@ route.post("/photo", async (req, res) => {
     const errorObj = getFailHttpResponseObj(err);
     res.json(errorObj);
   }
-});
-
-// route.get("/ytmp4/:num", async (req, res) => {
-//   const videoNumber = req.params.num;
-//   const videoPath = path.join(process.cwd(), `yt/${videoNumber}.mp4`);
-//   const videoBuffer = fs.readFileSync(videoPath);
-//   const videoBlob = new Blob([videoBuffer]);
-//   console.log("videoBlob", videoBlob);
-//   res.send(videoBlob);
-// });
-
-route.post("/ytmp4/:num", async (req, res) => {
-  const videoNumber = req.params.num;
-  const videoPath = path.join(process.cwd(), `yt/${videoNumber}.mp4`);
-  const videoBuffer = fs.readFileSync(videoPath);
-  const videoBlob = new Blob([videoBuffer]);
-  res.json({
-    key: "",
-    bucket: "",
-  });
 });
 
 route.post("/help", async (req, res) => {

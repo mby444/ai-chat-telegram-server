@@ -1,6 +1,7 @@
 *Daftar Command:*
 /help - Menampilkan daftar command
 /random - Menjelaskan topik apapun secara random
+/newquake - Menampilkan data gempa bumi terkini dari BMKG
 /clear - Membersihkan history chat
 
 *Informasi Penggunaan:*
